@@ -1,12 +1,15 @@
 package zjc.examples.quarkus.panacheRepo.service;
 
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
+import zjc.examples.quarkus.panacheRepo.mapper.OrganizationMapper;
 import zjc.examples.quarkus.panacheRepo.repository.OrganizationRepository;
 import zjc.examples.quarkus.panacheRepo.repository.OrganizationRepositoryImpl;
 import zjc.examples.quarkus.panacheRepo.resource.OrganizationResource;
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class OrganizationService {
 
     private final OrganizationRepository organizationRepository;
+    @Inject
+    OrganizationMapper organizationMapper;
 
     public OrganizationService(OrganizationRepositoryImpl organizationRepository) {
         this.organizationRepository = organizationRepository;
@@ -21,15 +26,18 @@ public class OrganizationService {
 
     private static final Logger LOG = Logger.getLogger(OrganizationResource.class);
 
-    public Organization get(Long id) {
-        return organizationRepository.findOrganizationById(id).orElseThrow(() -> new RuntimeException("Organization not found"));
+    public OrganizationDto get(Long id) {
+        return organizationMapper.toOrganizationDto(
+                organizationRepository
+                        .findOrganizationById(id)
+                        .orElseThrow(() -> new RuntimeException("Organization not found"))
+        );
     }
 
-    public Organization create(Organization organization) {
-        LOG.info("Create organization ...");
+    public OrganizationDto create(OrganizationDto organizationDto) {
+        Organization organization = organizationMapper.toOrganizationEntity(organizationDto);
         organizationRepository.save(organization);
-        LOG.info("new organization.id = " + organization.getId());
-        return organization;
+        return organizationMapper.toOrganizationDto(organization);
     }
 
     @Transactional

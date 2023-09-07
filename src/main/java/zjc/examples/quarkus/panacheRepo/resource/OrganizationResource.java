@@ -1,6 +1,7 @@
 package zjc.examples.quarkus.panacheRepo.resource;
 
 import org.jboss.logging.Logger;
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.service.OrganizationService;
 
@@ -28,15 +29,15 @@ public class OrganizationResource {
 
     @GET
     @Path("/{id}")
-    public Organization findById(@PathParam("id") Long id) {
+    public OrganizationDto findById(@PathParam("id") Long id) {
         return organizationService.get(id);
     }
 
 
     @PUT
     @Path("/save")
-    public Organization save(Organization organization) {
-        return organizationService.create(organization);
+    public OrganizationDto save(OrganizationDto organizationDto) {
+        return organizationService.create(organizationDto);
     }
 
     @PUT
