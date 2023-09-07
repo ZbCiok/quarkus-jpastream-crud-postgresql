@@ -7,7 +7,7 @@ import io.quarkus.jackson.ObjectMapperCustomizer;
 import javax.inject.Singleton;
 
 @Singleton
-public class ObjecMapperCustomizerConfig implements ObjectMapperCustomizer {
+public class ObjectMapperCustomizerConfig implements ObjectMapperCustomizer {
     @Override
     public void customize(ObjectMapper objectMapper) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
