@@ -16,4 +16,6 @@ public interface OrganizationRepository {
     boolean deleteMemberById(Long id);
 
     void save(Organization member);
+
+    void updateNameFrom(Long id);
 }

@@ -60,8 +60,12 @@ public class OrganizationService {
         organizationRepository.deleteMemberById(id);
     }
 
-    public Organization getByName(String name) {
-        return organizationRepository.findMemberByName(name).orElseThrow(() -> new RuntimeException("Organization not found"));
+    public void updateNameFrom(Long id) {
+        organizationRepository.updateNameFrom(id);
+    }
+
+    public Organization getByName(String id) {
+        return organizationRepository.findMemberByName(id).orElseThrow(() -> new RuntimeException("Organization not found"));
     }
 
     public Iterable<Organization> getAll() {

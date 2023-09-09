@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class OrganizationRepositoryImpl implements PanacheRepository<Organization>, OrganizationRepository {
     @Inject
     JPAStreamer jpaStreamer;
-    private Stream<Organization> filmStream() {
+    private Stream<Organization> OrganizationStream() {
         return jpaStreamer.stream(Organization.class);
     }
 
@@ -50,17 +50,17 @@ public class OrganizationRepositoryImpl implements PanacheRepository<Organizatio
     }
 
 
-//    @Transactional
-//    public void updateDescription(String desc, short length) {
-//        organizationStream()
-//                .filter(Organization$.length.greaterThan(length))
-//                .forEach(f -> {
-//                    f.setName("XXXXXXX");
-//                });
-//    }
+    @Transactional
+    public void updateNameFrom(Long id) {
+        organizationStream()
+                .filter(Organization$.id.greaterThan(id))
+                .forEach(f -> {
+                    f.setName("XXXXXXX");
+                });
+    }
 
-    public Organization findByTitle(String name) {
-        return filmStream()
+    public Organization findByName(String name) {
+        return organizationStream()
                 .filter(Organization$.name.equal(name))
                 .findFirst().orElse(null);
     }

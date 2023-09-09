@@ -29,4 +29,9 @@ public class Organization {
     public void setName(String name) {
         this.name = name;
     }
+
+//    @OneToMany(mappedBy = "organization")
+//    private Set<Department> departments;
+//    @OneToMany(mappedBy = "organization")
+//    private Set<Employee> employees;
 }

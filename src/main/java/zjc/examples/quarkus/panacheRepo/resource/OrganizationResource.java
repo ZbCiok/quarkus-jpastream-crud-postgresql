@@ -52,8 +52,14 @@ public class OrganizationResource {
         organizationService.delete(id);
     }
 
+    @PUT
+    @Path("/updateNameFrom/{id}")
+    public void updateNameFrom(@PathParam("id") Long id)  {
+        organizationService.updateNameFrom(3L);
+    }
+
     @GET
-    @Path("/findbyname/{name}")
+    @Path("/findByName/{name}")
     public Organization findByName(@PathParam("name") String name) {
         return organizationService.getByName(name);
     }
