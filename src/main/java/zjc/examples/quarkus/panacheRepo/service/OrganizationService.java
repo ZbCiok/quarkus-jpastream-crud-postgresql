@@ -1,5 +1,7 @@
 package zjc.examples.quarkus.panacheRepo.service;
 
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.mapper.OrganizationMapper;
@@ -8,15 +10,15 @@ import zjc.examples.quarkus.panacheRepo.repository.OrganizationRepositoryImpl;
 import zjc.examples.quarkus.panacheRepo.resource.OrganizationResource;
 import org.jboss.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+
 import java.util.Optional;
 
 @ApplicationScoped
 public class OrganizationService {
 
     private final OrganizationRepository organizationRepository;
+
     @Inject
     OrganizationMapper organizationMapper;
 

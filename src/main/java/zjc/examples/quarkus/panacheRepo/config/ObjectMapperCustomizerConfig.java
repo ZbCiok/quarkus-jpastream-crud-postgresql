@@ -3,10 +3,10 @@ package zjc.examples.quarkus.panacheRepo.config;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.jackson.ObjectMapperCustomizer;
+import jakarta.enterprise.context.ApplicationScoped;
 
-import javax.inject.Singleton;
 
-@Singleton
+@ApplicationScoped
 public class ObjectMapperCustomizerConfig implements ObjectMapperCustomizer {
     @Override
     public void customize(ObjectMapper objectMapper) {

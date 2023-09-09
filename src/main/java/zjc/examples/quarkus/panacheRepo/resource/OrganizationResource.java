@@ -1,14 +1,14 @@
 package zjc.examples.quarkus.panacheRepo.resource;
 
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.service.OrganizationService;
 
-
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/organizations")
@@ -33,9 +33,9 @@ public class OrganizationResource {
         return organizationService.get(id);
     }
 
-
     @PUT
     @Path("/save")
+    @Transactional
     public OrganizationDto save(OrganizationDto organizationDto) {
         return organizationService.create(organizationDto);
     }

@@ -1,8 +1,8 @@
 package zjc.examples.quarkus.panacheRepo;
 
+import jakarta.inject.Inject;
 import zjc.examples.quarkus.panacheRepo.service.OrganizationService;
 
-import javax.inject.Inject;
 
 public class ServiceTests {
 
