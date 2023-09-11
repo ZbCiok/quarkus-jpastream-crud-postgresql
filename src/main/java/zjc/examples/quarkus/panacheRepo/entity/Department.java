@@ -5,24 +5,22 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Organization {
-
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Integer id;
+    private String name;
 
-    public String name;
-
-    @OneToMany(mappedBy = "organization")
-    private Set<Department> departments;
-    @OneToMany(mappedBy = "organization")
+    @OneToMany(mappedBy = "department")
     private Set<Employee> employees;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Organization organization;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -34,14 +32,6 @@ public class Organization {
         this.name = name;
     }
 
-    public Set<Department> getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(Set<Department> departments) {
-        this.departments = departments;
-    }
-
     public Set<Employee> getEmployees() {
         return employees;
     }
@@ -49,6 +39,12 @@ public class Organization {
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
 }
-
-
