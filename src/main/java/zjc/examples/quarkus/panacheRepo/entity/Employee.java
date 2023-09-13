@@ -11,9 +11,9 @@ public class Employee {
     private String position;
     private int salary;
     private int age;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Department department;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Organization organization;
 
 

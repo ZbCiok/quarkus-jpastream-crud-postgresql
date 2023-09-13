@@ -11,7 +11,8 @@ public class Department {
     private Integer id;
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(fetch = FetchType.LAZY)
+    //@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     private Set<Employee> employees;
     @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;

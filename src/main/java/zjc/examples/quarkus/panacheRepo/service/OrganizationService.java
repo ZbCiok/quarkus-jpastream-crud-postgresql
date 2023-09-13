@@ -1,5 +1,6 @@
 package zjc.examples.quarkus.panacheRepo.service;
 
+import io.quarkus.hibernate.orm.panache.runtime.JpaOperations;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
@@ -12,29 +13,33 @@ import org.jboss.logging.Logger;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
 public class OrganizationService {
 
+    private static final Logger LOG = Logger.getLogger(OrganizationResource.class);
     private final OrganizationRepository organizationRepository;
 
     @Inject
     OrganizationMapper organizationMapper;
-
     public OrganizationService(OrganizationRepositoryImpl organizationRepository) {
         this.organizationRepository = organizationRepository;
     }
 
-    private static final Logger LOG = Logger.getLogger(OrganizationResource.class);
 
-    public OrganizationDto get(Long id) {
-        return organizationMapper.toOrganizationDto(
-                organizationRepository
-                        .findOrganizationById(id)
-                        .orElseThrow(() -> new RuntimeException("Organization not found"))
-        );
+
+    public List<OrganizationDto> getAll()  {
+        return organizationRepository.getAll();
     }
+
+    public OrganizationDto getById(final Long id) {
+        return organizationRepository.getById(id);
+    }
+
+    // ----------------------------------------------------------------------
+
 
     public OrganizationDto create(OrganizationDto organizationDto) {
         Organization organization = organizationMapper.toOrganizationEntity(organizationDto);
@@ -42,19 +47,19 @@ public class OrganizationService {
         return organizationMapper.toOrganizationDto(organization);
     }
 
-    @Transactional
-    public Organization update(Long id, Organization organization) {
-        Optional<Organization> organizationById = organizationRepository.findOrganizationById(id);
-        Organization savedOrganization;
-        if (organizationById.isPresent()) {
-           savedOrganization =  organizationById.get();
-           savedOrganization.setName(organization.getName());
-        } else {
-            throw new RuntimeException("Organization not found");
-        }
-        organizationRepository.save(savedOrganization);
-        return organization;
-    }
+//    @Transactional
+//    public Organization update(Long id, Organization organization) {
+//        Optional<Organization> organizationById = organizationRepository.getById(id);
+//        Organization savedOrganization;
+//        if (organizationById.isPresent()) {
+//           savedOrganization =  organizationById.get();
+//           savedOrganization.setName(organization.getName());
+//        } else {
+//            throw new RuntimeException("Organization not found");
+//        }
+//        organizationRepository.save(savedOrganization);
+//        return organization;
+//    }
 
     public void delete(Long id) {
         organizationRepository.deleteMemberById(id);
@@ -64,11 +69,4 @@ public class OrganizationService {
         organizationRepository.updateNameFrom(id);
     }
 
-    public Organization getByName(String id) {
-        return organizationRepository.findMemberByName(id).orElseThrow(() -> new RuntimeException("Organization not found"));
-    }
-
-    public Iterable<Organization> getAll() {
-        return organizationRepository.findAllOrganizations();
-    }
 }

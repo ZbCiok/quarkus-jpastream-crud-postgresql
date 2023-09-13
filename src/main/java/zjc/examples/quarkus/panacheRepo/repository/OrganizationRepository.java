@@ -1,5 +1,6 @@
 package zjc.examples.quarkus.panacheRepo.repository;
 
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 
 import java.util.List;
@@ -7,11 +8,12 @@ import java.util.Optional;
 
 public interface OrganizationRepository {
 
-    Optional<Organization> findOrganizationById(Long id);
+    public List<OrganizationDto> getAll();
 
-    Optional<Organization> findMemberByName(String username);
+    public OrganizationDto getById(final Long id);
 
-    List<Organization> findAllOrganizations();
+// -------------------------------------------------------------------
+
 
     boolean deleteMemberById(Long id);
 

@@ -1,54 +1,32 @@
 package zjc.examples.quarkus.panacheRepo.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Organization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-
     public String name;
 
-    @OneToMany(mappedBy = "organization")
+    @OneToMany(fetch = FetchType.EAGER)
+    //@OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
     private Set<Department> departments;
-    @OneToMany(mappedBy = "organization")
+
+    @OneToMany(fetch = FetchType.EAGER)
+    //@OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
     private Set<Employee> employees;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Department> getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(Set<Department> departments) {
-        this.departments = departments;
-    }
-
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
-    }
 }
 
 

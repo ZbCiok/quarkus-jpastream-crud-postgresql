@@ -4,6 +4,11 @@ import com.speedment.jpastreamer.application.JPAStreamer;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.OverridesAttribute;
+import jakarta.ws.rs.GET;
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
+import zjc.examples.quarkus.panacheRepo.entity.Department$;
+import zjc.examples.quarkus.panacheRepo.entity.Employee$;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.entity.Organization$;
 
@@ -11,36 +16,45 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.speedment.jpastreamer.streamconfiguration.StreamConfiguration.of;
 
 @ApplicationScoped
 public class OrganizationRepositoryImpl implements PanacheRepository<Organization>, OrganizationRepository {
     @Inject
     JPAStreamer jpaStreamer;
-    private Stream<Organization> OrganizationStream() {
+    private Stream<Organization> organizationStream() {
         return jpaStreamer.stream(Organization.class);
     }
 
-    private Stream<Organization> organizationStream() { return jpaStreamer.stream(Organization.class); }
-    @Override
-    public Optional<Organization> findOrganizationById(Long id) {
-        return findByIdOptional(id);
+
+
+
+    public List<OrganizationDto> getAll() {
+        return jpaStreamer.stream(Organization.class)
+                .sorted(Organization$.name)
+                .map(OrganizationDto::new)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Organization> findAllOrganizations() {
-        return findAll().list();
+    public OrganizationDto getById(final Long id) {
+        return jpaStreamer.stream(of(Organization.class))
+                .filter(Organization$.id.equal(id))
+                .map(OrganizationDto::new)
+                .findFirst()
+                .orElseThrow();
     }
+
+ // --------------------------------------------------------
+
 
     @Override
     @Transactional
     public void save(Organization organization) {
         persistAndFlush(organization);
-    }
-
-    @Override
-    public Optional<Organization> findMemberByName(String name) {
-        return find("name = ?1", name).stream().findFirst();
     }
 
     @Override
@@ -64,19 +78,4 @@ public class OrganizationRepositoryImpl implements PanacheRepository<Organizatio
                 .filter(Organization$.name.equal(name))
                 .findFirst().orElse(null);
     }
-
-//    /**
-//     * Updates the description of all films that are longer than the provided length to desc.
-//     *
-//     * @param desc the new description
-//     * @param length the minimum length of films that should be updated, exclusive
-//     */
-//    @Transactional
-//    public void updateDescription(String desc, short length) {
-//        filmStream()
-//                .filter(Organization$.length.greaterThan(length))
-//                .forEach(f -> {
-//                    f.setDescription("YYYYYYYY");
-//                });
-//    }
 }

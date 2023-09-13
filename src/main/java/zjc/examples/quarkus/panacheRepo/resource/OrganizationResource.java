@@ -7,9 +7,11 @@ import jakarta.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
+import zjc.examples.quarkus.panacheRepo.entity.Organization$;
 import zjc.examples.quarkus.panacheRepo.service.OrganizationService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/organizations")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -17,21 +19,27 @@ import java.util.List;
 public class OrganizationResource {
 
     private static final Logger LOG = Logger.getLogger(OrganizationResource.class);
-
     @Inject
     OrganizationService organizationService;
 
+
+
     @GET
     @Path("/")
-    public List<Organization> findAll() {
-        return (List<Organization>) organizationService.getAll();
+    public List<OrganizationDto> getAll() {
+        return organizationService.getAll();
     }
 
     @GET
-    @Path("/{id}")
-    public OrganizationDto findById(@PathParam("id") Long id) {
-        return organizationService.get(id);
+    @Path("/getById/{id}")
+    public OrganizationDto getById(@PathParam("id") Long id) {
+        return organizationService.getById(id);
     }
+
+
+    // ---------------------------------------------------------
+
+
 
     @PUT
     @Path("/save")
@@ -40,11 +48,11 @@ public class OrganizationResource {
         return organizationService.create(organizationDto);
     }
 
-    @PUT
-    @Path("/update/{id}")
-    public Organization update(@PathParam("id") Long id, Organization organization) {
-        return organizationService.update(id, organization);
-    }
+//    @PUT
+//    @Path("/update/{id}")
+//    public Organization update(@PathParam("id") Long id, Organization organization) {
+//        return organizationService.update(id, organization);
+//    }
 
     @DELETE
     @Path("/delete/{id}")
@@ -56,11 +64,5 @@ public class OrganizationResource {
     @Path("/updateNameFrom/{id}")
     public void updateNameFrom(@PathParam("id") Long id)  {
         organizationService.updateNameFrom(3L);
-    }
-
-    @GET
-    @Path("/findByName/{name}")
-    public Organization findByName(@PathParam("name") String name) {
-        return organizationService.getByName(name);
     }
 }
