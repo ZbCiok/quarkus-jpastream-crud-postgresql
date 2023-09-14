@@ -1,5 +1,6 @@
 package zjc.examples.quarkus.panacheRepo.repository;
 
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 
@@ -11,6 +12,8 @@ public interface OrganizationRepository {
     public List<OrganizationDto> getAll();
 
     public OrganizationDto getById(final Long id);
+
+    public OrganizationDetailsDto getDetailsById(final Long id);
 
 // -------------------------------------------------------------------
 

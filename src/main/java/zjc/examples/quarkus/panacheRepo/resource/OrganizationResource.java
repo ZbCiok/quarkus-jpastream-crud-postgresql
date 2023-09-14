@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.entity.Organization$;
@@ -31,9 +32,15 @@ public class OrganizationResource {
     }
 
     @GET
-    @Path("/getById/{id}")
+    @Path("/{id}")
     public OrganizationDto getById(@PathParam("id") Long id) {
         return organizationService.getById(id);
+    }
+
+    @GET
+    @Path("/detailsById/{id}")
+    public OrganizationDetailsDto getDetailsById(@PathParam("id") final Long id) {
+        return organizationService.getDetailsById(id);
     }
 
 

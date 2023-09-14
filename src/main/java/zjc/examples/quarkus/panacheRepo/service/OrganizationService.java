@@ -3,6 +3,7 @@ package zjc.examples.quarkus.panacheRepo.service;
 import io.quarkus.hibernate.orm.panache.runtime.JpaOperations;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.mapper.OrganizationMapper;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @ApplicationScoped
 public class OrganizationService {
 
-    private static final Logger LOG = Logger.getLogger(OrganizationResource.class);
+    private static final Logger LOG = Logger.getLogger(OrganizationService.class);
     private final OrganizationRepository organizationRepository;
 
     @Inject
@@ -36,6 +37,10 @@ public class OrganizationService {
 
     public OrganizationDto getById(final Long id) {
         return organizationRepository.getById(id);
+    }
+
+    public OrganizationDetailsDto getDetailsById(final Long id) {
+        return organizationRepository.getDetailsById(id);
     }
 
     // ----------------------------------------------------------------------

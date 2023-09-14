@@ -6,9 +6,10 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.OverridesAttribute;
 import jakarta.ws.rs.GET;
+import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Department$;
-import zjc.examples.quarkus.panacheRepo.entity.Employee$;
+//import zjc.examples.quarkus.panacheRepo.entity.Employee$;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.entity.Organization$;
 
@@ -47,6 +48,26 @@ public class OrganizationRepositoryImpl implements PanacheRepository<Organizatio
                 .findFirst()
                 .orElseThrow();
     }
+
+
+    public OrganizationDetailsDto getDetailsById(final Long id) {
+        return jpaStreamer.stream(of(Organization.class)
+                        //.joining(Organization$.departments)
+                        .joining(Organization$.employees))
+                .filter(Organization$.id.equal(id))
+                .map(OrganizationDetailsDto::new)
+                .findFirst()
+                .orElseThrow();
+    }
+
+/*
+    Map<Language, Set<Film>> languageFilmMap = jpaStreamer.stream(of(Language.class)
+                  .joining(Language$.films))
+                          .collect(toMap(
+                                Function.identity(),
+                                Language::getFilms)
+            );
+*/
 
  // --------------------------------------------------------
 

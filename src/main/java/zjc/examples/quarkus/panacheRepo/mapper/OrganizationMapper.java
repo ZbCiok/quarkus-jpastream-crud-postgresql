@@ -6,6 +6,6 @@ import zjc.examples.quarkus.panacheRepo.entity.Organization;
 
 @Mapper(componentModel = "cdi")
 public interface OrganizationMapper {
-    OrganizationDto toOrganizationDto(Organization Organization);
+    OrganizationDto toOrganizationDto(Organization organization);
     Organization toOrganizationEntity(OrganizationDto organizationDto);
 }
