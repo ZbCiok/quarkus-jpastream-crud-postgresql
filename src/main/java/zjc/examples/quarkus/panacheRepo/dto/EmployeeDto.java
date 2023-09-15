@@ -1,18 +1,10 @@
 package zjc.examples.quarkus.panacheRepo.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.*;
-import zjc.examples.quarkus.panacheRepo.entity.Department;
 import zjc.examples.quarkus.panacheRepo.entity.Employee;
-import zjc.examples.quarkus.panacheRepo.entity.Organization;
+
 
 import java.io.Serializable;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class EmployeeDto  implements Serializable {
 
     public Long id;
@@ -22,7 +14,6 @@ public class EmployeeDto  implements Serializable {
     public int age;
     //private Department department;
 
-    public Organization organization;
 
     public EmployeeDto() { }
     public EmployeeDto(Employee emp) {
@@ -32,7 +23,6 @@ public class EmployeeDto  implements Serializable {
         this.salary = emp.getSalary();
         this.age = emp.getAge();
         //this.department = emp.getDepartment();
-        this.organization = emp.getOrganization();
     }
 
     public Long getId() {
@@ -83,11 +73,4 @@ public class EmployeeDto  implements Serializable {
 //        this.department = department;
 //    }
 
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
 }

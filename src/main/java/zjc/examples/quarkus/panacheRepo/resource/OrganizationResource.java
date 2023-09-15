@@ -7,12 +7,8 @@ import jakarta.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
-import zjc.examples.quarkus.panacheRepo.entity.Organization;
-import zjc.examples.quarkus.panacheRepo.entity.Organization$;
 import zjc.examples.quarkus.panacheRepo.service.OrganizationService;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path("/organizations")
 @Consumes(MediaType.APPLICATION_JSON)

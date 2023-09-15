@@ -2,22 +2,15 @@ package zjc.examples.quarkus.panacheRepo.repository;
 
 import com.speedment.jpastreamer.application.JPAStreamer;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.validation.OverridesAttribute;
-import jakarta.ws.rs.GET;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
-import zjc.examples.quarkus.panacheRepo.entity.Department$;
-//import zjc.examples.quarkus.panacheRepo.entity.Employee$;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.entity.Organization$;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,8 +45,8 @@ public class OrganizationRepositoryImpl implements PanacheRepository<Organizatio
 
     public OrganizationDetailsDto getDetailsById(final Long id) {
         return jpaStreamer.stream(of(Organization.class)
-                        //.joining(Organization$.departments)
-                        .joining(Organization$.employees))
+                        .joining(Organization$.departments))
+                        //.joining(Organization$.employees))
                 .filter(Organization$.id.equal(id))
                 .map(OrganizationDetailsDto::new)
                 .findFirst()

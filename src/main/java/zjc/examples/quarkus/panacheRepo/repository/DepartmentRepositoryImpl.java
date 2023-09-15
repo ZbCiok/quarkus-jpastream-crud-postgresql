@@ -5,9 +5,9 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import zjc.examples.quarkus.panacheRepo.dto.EmployeeDto;
-import zjc.examples.quarkus.panacheRepo.entity.Employee;
-import zjc.examples.quarkus.panacheRepo.entity.Employee$;
+import zjc.examples.quarkus.panacheRepo.dto.DepartmentDto;
+import zjc.examples.quarkus.panacheRepo.entity.Department;
+import zjc.examples.quarkus.panacheRepo.entity.Department$;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,25 +16,25 @@ import java.util.stream.Stream;
 import static com.speedment.jpastreamer.streamconfiguration.StreamConfiguration.of;
 
 @ApplicationScoped
-public class EmployeeRepositoryImpl implements PanacheRepository<Employee>, EmployeeRepository {
+public class DepartmentRepositoryImpl implements PanacheRepository<Department>, DepartmentRepository {
     @Inject
     JPAStreamer jpaStreamer;
-    private Stream<Employee> employeeStream() {
-        return jpaStreamer.stream(Employee.class);
+    private Stream<Department> departmentStream() {
+        return jpaStreamer.stream(Department.class);
     }
 
 
-    public List<EmployeeDto> getAll() {
-        return jpaStreamer.stream(Employee.class)
-                .sorted(Employee$.name)
-                .map(EmployeeDto::new)
+    public List<DepartmentDto> getAll() {
+        return jpaStreamer.stream(Department.class)
+                .sorted(Department$.name)
+                .map(DepartmentDto::new)
                 .collect(Collectors.toList());
     }
 
-    public EmployeeDto getById(final Long id) {
-        return jpaStreamer.stream(of(Employee.class))
-                .filter(Employee$.id.equal(id))
-                .map(EmployeeDto::new)
+    public DepartmentDto getById(final Long id) {
+        return jpaStreamer.stream(of(Department.class))
+                .filter(Department$.id.equal(id))
+                .map(DepartmentDto::new)
                 .findFirst()
                 .orElseThrow();
     }
@@ -64,8 +64,8 @@ public class EmployeeRepositoryImpl implements PanacheRepository<Employee>, Empl
 
     @Override
     @Transactional
-    public void save(Employee emp) {
-        persistAndFlush(emp);
+    public void save(Department dep) {
+        persistAndFlush(dep);
     }
 
 //    @Override

@@ -2,20 +2,17 @@ package zjc.examples.quarkus.panacheRepo.service;
 
 import io.quarkus.hibernate.orm.panache.runtime.JpaOperations;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
 import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.mapper.OrganizationMapper;
 import zjc.examples.quarkus.panacheRepo.repository.OrganizationRepository;
 import zjc.examples.quarkus.panacheRepo.repository.OrganizationRepositoryImpl;
-import zjc.examples.quarkus.panacheRepo.resource.OrganizationResource;
 import org.jboss.logging.Logger;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
-import java.util.Optional;
 
 @ApplicationScoped
 public class OrganizationService {

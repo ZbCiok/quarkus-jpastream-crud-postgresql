@@ -3,34 +3,34 @@ package zjc.examples.quarkus.panacheRepo.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jboss.logging.Logger;
-import zjc.examples.quarkus.panacheRepo.dto.EmployeeDto;
-import zjc.examples.quarkus.panacheRepo.entity.Employee;
-import zjc.examples.quarkus.panacheRepo.mapper.EmployeeMapper;
-import zjc.examples.quarkus.panacheRepo.repository.EmployeeRepository;
-import zjc.examples.quarkus.panacheRepo.repository.EmployeeRepositoryImpl;
+import zjc.examples.quarkus.panacheRepo.dto.DepartmentDto;
+import zjc.examples.quarkus.panacheRepo.entity.Department;
+import zjc.examples.quarkus.panacheRepo.mapper.DepartmentMapper;
+import zjc.examples.quarkus.panacheRepo.repository.DepartmentRepository;
+import zjc.examples.quarkus.panacheRepo.repository.DepartmentRepositoryImpl;
 
 import java.util.List;
 
 @ApplicationScoped
-public class EmployeeService {
+public class DepartmentService {
 
-    private static final Logger LOG = Logger.getLogger(EmployeeService.class);
-    private final EmployeeRepository employeeRepository;
+    private static final Logger LOG = Logger.getLogger(DepartmentService.class);
+    private final DepartmentRepository departmentRepository;
 
     @Inject
-    EmployeeMapper employeeMapper;
-    public EmployeeService(EmployeeRepositoryImpl employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    DepartmentMapper departmentMapper;
+    public DepartmentService(DepartmentRepositoryImpl departmentRepository) {
+        this.departmentRepository = departmentRepository;
     }
 
 
 
-    public List<EmployeeDto> getAll()  {
-        return employeeRepository.getAll();
+    public List<DepartmentDto> getAll()  {
+        return departmentRepository.getAll();
     }
 
-    public EmployeeDto getById(final Long id) {
-        return employeeRepository.getById(id);
+    public DepartmentDto getById(final Long id) {
+        return departmentRepository.getById(id);
     }
 
 //    public OrganizationDetailsDto getDetailsById(final Long id) {
@@ -40,10 +40,10 @@ public class EmployeeService {
     // ----------------------------------------------------------------------
 
 
-    public EmployeeDto create(EmployeeDto employeeDto) {
-        Employee employee = employeeMapper.toEmployeeEntity(employeeDto);
-        employeeRepository.save(employee);
-        return employeeMapper.toEmployeeDto(employee);
+    public DepartmentDto create(DepartmentDto departmentDto) {
+        Department department = departmentMapper.toDepartmentEntity(departmentDto);
+        departmentRepository.save(department);
+        return departmentMapper.toDepartmentDto(department);
     }
 
 //    @Transactional

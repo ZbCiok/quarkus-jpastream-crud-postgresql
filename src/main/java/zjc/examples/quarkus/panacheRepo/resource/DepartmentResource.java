@@ -5,32 +5,32 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
-import zjc.examples.quarkus.panacheRepo.dto.EmployeeDto;
-import zjc.examples.quarkus.panacheRepo.service.EmployeeService;
+import zjc.examples.quarkus.panacheRepo.dto.DepartmentDto;
+import zjc.examples.quarkus.panacheRepo.service.DepartmentService;
 
 import java.util.List;
 
-@Path("/employees")
+@Path("/departments")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class EmployeeResource {
+public class DepartmentResource {
 
-    private static final Logger LOG = Logger.getLogger(EmployeeResource.class);
+    private static final Logger LOG = Logger.getLogger(DepartmentResource.class);
     @Inject
-    EmployeeService employeeService;
+    DepartmentService departmentService;
 
 
 
     @GET
     @Path("/")
-    public List<EmployeeDto> getAll() {
-        return employeeService.getAll();
+    public List<DepartmentDto> getAll() {
+        return departmentService.getAll();
     }
 
     @GET
     @Path("/{id}")
-    public EmployeeDto getById(@PathParam("id") Long id) {
-        return employeeService.getById(id);
+    public DepartmentDto getById(@PathParam("id") Long id) {
+        return departmentService.getById(id);
     }
 
 //    @GET
@@ -47,8 +47,8 @@ public class EmployeeResource {
     @PUT
     @Path("/save")
     @Transactional
-    public EmployeeDto save(EmployeeDto employeeDto) {
-        return employeeService.create(employeeDto);
+    public DepartmentDto save(DepartmentDto departmentDto) {
+        return departmentService.create(departmentDto);
     }
 
 //    @PUT

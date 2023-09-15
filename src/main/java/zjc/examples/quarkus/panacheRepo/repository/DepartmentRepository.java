@@ -1,14 +1,15 @@
 package zjc.examples.quarkus.panacheRepo.repository;
 
-import zjc.examples.quarkus.panacheRepo.dto.EmployeeDto;
-import zjc.examples.quarkus.panacheRepo.entity.Employee;
+import zjc.examples.quarkus.panacheRepo.dto.DepartmentDto;
+import zjc.examples.quarkus.panacheRepo.entity.Department;
+
 import java.util.List;
 
-public interface EmployeeRepository {
+public interface DepartmentRepository {
 
-    public List<EmployeeDto> getAll();
+    public List<DepartmentDto> getAll();
 
-    public EmployeeDto getById(final Long id);
+    public DepartmentDto getById(final Long id);
 
     //public EmployeeDetailsDto getEmplyeeById(final Long id);
 
@@ -17,7 +18,7 @@ public interface EmployeeRepository {
 
     //boolean deleteMemberById(Long id);
 
-    void save(Employee emp);
+    void save(Department department);
 
     //void updateNameFrom(Long id);
 }

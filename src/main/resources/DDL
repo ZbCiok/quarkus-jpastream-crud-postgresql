@@ -34,11 +34,9 @@ CREATE TABLE public.employee (
 	"position" varchar(255) NULL,
 	salary int4 NOT NULL,
 	department_id int4 NULL,
-	organization_id int4 NULL,
 	CONSTRAINT employee_pkey PRIMARY KEY (id)
 );
 
-ALTER TABLE public.employee ADD CONSTRAINT fk2rna2w2imtuuk9f2et8yllawk FOREIGN KEY (organization_id) REFERENCES public.organization(id);
 ALTER TABLE public.employee ADD CONSTRAINT fkbejtwvg9bxus2mffsm3swj3u9 FOREIGN KEY (department_id) REFERENCES public.department(id);
 
 # ---------------------------------------------------

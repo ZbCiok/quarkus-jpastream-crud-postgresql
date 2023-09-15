@@ -1,5 +1,5 @@
-# quarkus-panache-crud
-
+# quarkus-jpastream-crud-postgresql
+###### (under development)
 
 ### Run:
 
@@ -10,12 +10,12 @@ java -jar target/quarkus-app/quarkus-run.jar
 ### Postman:
 Create
 
-![create](./postman-pics/create.png)
+![create](./pics/create.png)
 
 Update
 
-![update](./postman-pics/update.png)
+![update](./pics/update.png)
 
 Delete
 
-![delete](./postman-pics/delete.png)
+![delete](./pics/delete.png)

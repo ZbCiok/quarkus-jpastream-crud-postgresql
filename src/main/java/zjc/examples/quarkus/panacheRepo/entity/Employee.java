@@ -14,12 +14,10 @@ public class Employee implements Serializable  {
     public int salary;
     public int age;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Department department;
-
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    public Organization organization;
+    private Department department;
+
 
 
     public Employee() {}
@@ -65,19 +63,11 @@ public class Employee implements Serializable  {
         this.age = age;
     }
 
-//    public Department getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(Department department) {
-//        this.department = department;
-//    }
-
-    public Organization getOrganization() {
-        return organization;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
