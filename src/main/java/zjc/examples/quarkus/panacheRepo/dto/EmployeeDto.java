@@ -1,5 +1,6 @@
 package zjc.examples.quarkus.panacheRepo.dto;
 
+import zjc.examples.quarkus.panacheRepo.entity.Department;
 import zjc.examples.quarkus.panacheRepo.entity.Employee;
 
 
@@ -12,7 +13,8 @@ public class EmployeeDto  implements Serializable {
     public String position;
     public int salary;
     public int age;
-    //private Department department;
+
+    public Department department;
 
 
     public EmployeeDto() { }
@@ -22,7 +24,7 @@ public class EmployeeDto  implements Serializable {
         this.position = emp.getPosition();
         this.salary = emp.getSalary();
         this.age = emp.getAge();
-        //this.department = emp.getDepartment();
+        this.department = emp.getDepartment();
     }
 
     public Long getId() {
@@ -65,12 +67,12 @@ public class EmployeeDto  implements Serializable {
         this.age = age;
     }
 
-//    public Department getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(Department department) {
-//        this.department = department;
-//    }
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
 }

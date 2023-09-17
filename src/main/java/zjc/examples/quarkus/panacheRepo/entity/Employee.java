@@ -15,9 +15,8 @@ public class Employee implements Serializable  {
     public int age;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Department department;
-
 
 
     public Employee() {}

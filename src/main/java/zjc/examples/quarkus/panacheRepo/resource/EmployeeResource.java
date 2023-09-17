@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
+
 import zjc.examples.quarkus.panacheRepo.dto.EmployeeDto;
 import zjc.examples.quarkus.panacheRepo.service.EmployeeService;
 
@@ -20,6 +21,13 @@ public class EmployeeResource {
     EmployeeService employeeService;
 
 
+
+//    @GET
+//    @Path("/")
+//    public RestResponse<List<EmployeeDto>> getAll() {
+//        return RestResponse.ResponseBuilder.ok(employeeService.getAll()).build();
+//        //return employeeService.getAll();
+//    }
 
     @GET
     @Path("/")
