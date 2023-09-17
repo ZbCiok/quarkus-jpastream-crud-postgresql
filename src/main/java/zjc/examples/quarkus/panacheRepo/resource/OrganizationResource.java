@@ -4,9 +4,15 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.jboss.logging.Logger;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDetailsDto;
 import zjc.examples.quarkus.panacheRepo.dto.OrganizationDto;
+import zjc.examples.quarkus.panacheRepo.entity.Organization;
 import zjc.examples.quarkus.panacheRepo.service.OrganizationService;
 import java.util.List;
 
@@ -23,6 +29,9 @@ public class OrganizationResource {
 
     @GET
     @Path("/")
+    @Operation(summary = "Gets organizations", description = "Lists all available organizations")
+    @APIResponses(value = @APIResponse(responseCode = "200", description = "Success",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Organization.class))))
     public List<OrganizationDto> getAll() {
         return organizationService.getAll();
     }

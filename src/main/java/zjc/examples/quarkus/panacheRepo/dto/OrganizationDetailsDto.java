@@ -8,12 +8,12 @@ import java.util.Set;
 public class OrganizationDetailsDto {
     public Long id;
     public String name;
-    //public Set<Department> department;
+    public Set<Department> department;
 
     public OrganizationDetailsDto(Organization org) {
         this.id = org.getId();
         this.name = org.getName();
-        //this.department = org.getDepartments();
+        this.department = org.getDepartments();
     }
 
     public Long getId() {
@@ -32,11 +32,11 @@ public class OrganizationDetailsDto {
         this.name = name;
     }
 
-//    public Set<Department> getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(Set<Department> department) {
-//        this.department = department;
-//    }
+    public Set<Department> getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Set<Department> department) {
+        this.department = department;
+    }
 }
