@@ -25,8 +25,6 @@ public class OrganizationRepositoryImpl implements PanacheRepository<Organizatio
     }
 
 
-
-
     public List<OrganizationDto> getAll() {
         return jpaStreamer.stream(Organization.class)
                 .sorted(Organization$.name)
@@ -42,25 +40,15 @@ public class OrganizationRepositoryImpl implements PanacheRepository<Organizatio
                 .orElseThrow();
     }
 
-
     public OrganizationDetailsDto getDetailsById(final Long id) {
         return jpaStreamer.stream(of(Organization.class)
                         .joining(Organization$.departments))
-                        //.joining(Organization$.employees))
                 .filter(Organization$.id.equal(id))
                 .map(OrganizationDetailsDto::new)
                 .findFirst()
                 .orElseThrow();
     }
 
-/*
-    Map<Language, Set<Film>> languageFilmMap = jpaStreamer.stream(of(Language.class)
-                  .joining(Language$.films))
-                          .collect(toMap(
-                                Function.identity(),
-                                Language::getFilms)
-            );
-*/
 
  // --------------------------------------------------------
 
