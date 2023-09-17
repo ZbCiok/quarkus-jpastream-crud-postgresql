@@ -9,15 +9,5 @@ java -jar target/quarkus-app/quarkus-run.jar
 
 /swagger-ui.html/
 
-### Postman:
-Create
+additional information in /pics
 
-![create](./pics/create.png)
-
-Update
-
-![update](./pics/update.png)
-
-Delete
-
-![delete](./pics/delete.png)
