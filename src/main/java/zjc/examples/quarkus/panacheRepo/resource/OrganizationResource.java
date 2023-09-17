@@ -29,9 +29,9 @@ public class OrganizationResource {
 
     @GET
     @Path("/")
-    @Operation(summary = "Gets organizations", description = "Lists all available organizations")
-    @APIResponses(value = @APIResponse(responseCode = "200", description = "Success",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Organization.class))))
+//    @Operation(summary = "Gets organizations", description = "Lists all available organizations")
+//    @APIResponses(value = @APIResponse(responseCode = "200", description = "Success",
+//            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Organization.class))))
     public List<OrganizationDto> getAll() {
         return organizationService.getAll();
     }
